@@ -70,7 +70,6 @@
                         "AdminEmail",
                         "AdminUserName",
                         "AdminPassword",
-                        "NotificationEmail",
                         "MagentoCurrency",
                         "MagentoLanguage",
                         "MagentoTimezone",
@@ -166,9 +165,6 @@
                 },
                 "MagentoReleaseMedia": {
                     "default": "S3 file path to download Magento"
-                },
-                "NotificationEmail": {
-                    "default": "Email address to notify"
                 },
                 "PrivateSubnet1ID": {
                     "default": "Private subnet 1 ID"
@@ -446,12 +442,6 @@
             "Description": "The time zone setting that specifies the primary market served by the Magento store",
             "Type": "String"
         },
-        "NotificationEmail": {
-            "AllowedPattern": "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)",
-            "ConstraintDescription": "Must be a valid email address.",
-            "Description": "Email address to notify if there are any scaling operations",
-            "Type": "String"
-        },
         "PrivateSubnet1ID": {
             "Description": "Private Subnet Id 1",
             "Type": "AWS::EC2::Subnet::Id"
@@ -478,7 +468,7 @@
         "S3KeyPrefix": {
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "magento-cf/",
+            "Default": "magento/",
             "Description": "S3 key prefix for the Magento Installation assets. Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         },
@@ -756,9 +746,6 @@
                             "SecurityGroupStack",
                             "Outputs.WebServerSecurityGroup"
                         ]
-                    },
-                    "NotificationEmail": {
-                        "Ref": "NotificationEmail"
                     },
                     "WebServerMinSize": {
                         "Ref": "WebServerMinSize"

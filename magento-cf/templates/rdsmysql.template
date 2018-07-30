@@ -41,6 +41,7 @@
                 "db.t2.micro",
                 "db.t2.small",
                 "db.t2.medium",
+                "db.t2.large",
                 "db.m2.xlarge",
                 "db.m2.2xlarge",
                 "db.m2.4xlarge",

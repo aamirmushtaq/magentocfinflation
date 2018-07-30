@@ -251,7 +251,7 @@
         "S3KeyPrefix": {
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "magento-cf/",
+            "Default": "magento/",
             "Description": "S3 key prefix for the Magento Installation assets. Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         },

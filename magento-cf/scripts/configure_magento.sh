@@ -54,6 +54,8 @@ else
 fi
 
 cd /var/www/html/bin
+aws s3 cp s3://cfmagentofiles/magento.sql /tmp/
+mysql --host=$dbhost --user=$dbuser --password=$dbpassword --database=$dbname -e "source /tmp/magento.sql"
 ./magento setup:install --base-url=$protocol://$cname/ \
 --db-host=$dbhost --db-name=$dbname --db-user=$dbuser --db-password=$dbpassword \
 --admin-firstname=$adminfirst --admin-lastname=$adminlast --admin-email=$adminemail \
@@ -74,7 +76,7 @@ $init_value
         'password' => '',
         'timeout' => '2.5',
         'persistent_identifier' => '',
-        'database' => '0',adminuri
+        'database' => '0',
         'compression_threshold' => '2048',
         'compression_library' => 'gzip',
         'log_level' => '1',

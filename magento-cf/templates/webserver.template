@@ -92,12 +92,6 @@
             "Description": "RDS MySQL Endpoint",
             "Type": "String"
         },
-        "NotificationEmail": {
-            "AllowedPattern": "([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)",
-            "ConstraintDescription": "Must be a valid email address.",
-            "Description": "Email address to notify if there are any scaling operations",
-            "Type": "String"
-        },
         "S3BucketName": {
             "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
             "ConstraintDescription": "Magento Installation bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
@@ -108,7 +102,7 @@
         "S3KeyPrefix": {
             "AllowedPattern": "^[0-9a-zA-Z-/]*$",
             "ConstraintDescription": "Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-            "Default": "magento-cf/",
+            "Default": "magento/",
             "Description": "S3 key prefix for the Magento Installation assets. Magento Installation key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
             "Type": "String"
         },
@@ -300,7 +294,7 @@
                                 {
                                     "Effect": "Allow",
                                     "Action": [
-                                        "s3:GetObject"
+                                        "s3:*"
                                     ],
                                     "Resource": "*"
                                 }
@@ -414,7 +408,7 @@
                             "/tmp/params.txt": {
                                 "content": {
                                     "Fn::Sub": [
-                                        "MySQLEndPointAddress|${MySQLEndPointAddress}\nDBMasterUsername|${DBMasterUsername}\nDBMasterUserPassword|${DBMasterUserPassword}\nDBName|${DBName}\nDNSName|${Param1}\nAdminFirstName|${AdminFirstName}\nAdminLastName|${AdminLastName}\nAdminEmail|${AdminEmail}\nAdminUserName|${AdminUserName}\nAdminPassword|${AdminPassword}\nElastiCacheEndpoint|${ElastiCacheEndpoint}\nFileSystem|${FileSystem}\nMagentoReleaseMedia|${MagentoReleaseMedia}\nSSLCertificateId|${SSLCertificateId}\nMagentoLanguage|${MagentoLanguage}\nMagentoCurrency|${MagentoCurrency}\nMagentoTimezone|${MagentoTimezone}\n",
+                                        "MySQLEndPointAddress|${MySQLEndPointAddress}\nDBMasterUsername|${DBMasterUsername}\nDBMasterUserPassword|${DBMasterUserPassword}\nDBName|${DBName}\nDNSName|${Param1}\nAdminFirstName|${AdminFirstName}\nAdminLastName|${AdminLastName}\nAdminEmail|${AdminEmail}\nAdminUserName|${AdminUserName}\nAdminPassword|${AdminPassword}\nElastiCacheEndpoint|${ElastiCacheEndpoint}\nMagentoReleaseMedia|${MagentoReleaseMedia}\nSSLCertificateId|${SSLCertificateId}\nMagentoLanguage|${MagentoLanguage}\nMagentoCurrency|${MagentoCurrency}\nMagentoTimezone|${MagentoTimezone}\n",
                                         {
                                             "Param1": {
                                                 "Fn::If": [
@@ -651,17 +645,6 @@
                 ],
                 "VPCZoneIdentifier": {
                     "Ref": "WebServerSubnets"
-                },
-                "NotificationConfiguration": {
-                    "TopicARN": {
-                        "Ref": "NotificationTopic"
-                    },
-                    "NotificationTypes": [
-                        "autoscaling:EC2_INSTANCE_LAUNCH",
-                        "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
-                        "autoscaling:EC2_INSTANCE_TERMINATE",
-                        "autoscaling:EC2_INSTANCE_TERMINATE_ERROR"
-                    ]
                 },
                 "Tags": [
                     {
